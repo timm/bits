@@ -14,8 +14,8 @@ QUIET = \033[0m#
 Top=$(shell git rev-parse --show-toplevel)
 
 help:  ## show help
-	gawk 'BEGIN { FS   = ":.*## "; print "\nmake [WHAT]" }              \
-	      /^[^ \t].*##/ {                                                \
+	gawk 'BEGIN { FS   = ":.*## "; print "\nmake [WHAT]" }            \
+	      /^[^ \t].*##/ {                                              \
 	        printf("   $(SHOUT)%-10s$(QUIET) %s\n", $$1, $$2) | "sort"} \
 	' $(MAKEFILE_LIST)
 
@@ -29,6 +29,15 @@ push: ## commit to main
 
 sh: ## run my shell
 	Top=$(Top) bash --init-file $(Top)/etc/init.sh -i
+
+%.md: ## inlude 
+	gawk '\
+		in==0 && match($$0, /^```[a-zA-Z]+\s+\S+/) {                 \
+			print; split($$0,f," ");                                    \
+			while ((getline < f[2]) > 0) print; close(f[2]); in=1; next }\
+		in && /^```/ { print; in=0; next }\
+		in { next }\
+		1 ' $< > .tmp && mv .tmp $@
 
 #----------------------------------------------------------------
 # Local tricks

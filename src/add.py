@@ -1,12 +1,16 @@
+# Add `v` to `i`. Skip unknowns ("?"), return v.
 from data import Num, Sym
 
-# Add `v` to `i`. Skip unknowns ("?"), return v.
+# Subtraction is like addition, just with a negative increment  
+def sub(i,v,purge=False): 
+  return add(i, v, inc= -1, purge=purge)
+
 def add(i,v, inc=1, purge=False): # -> v
   def _sym(sym,s): sym.has[s] = inc + sym.has.get(s,0)
 
   def _data(data,row): 
     if inc < 0:  
-      if purge: data._rows.remove(v) 
+      if purge: data._rows.remove(v)  # Slow for very large lists
       [sub(col, row[col.at], inc) for col in data.cols.all]  
     else: 
       data._rows += [row] # update rows
@@ -28,6 +32,4 @@ def add(i,v, inc=1, purge=False): # -> v
     (_num if i.it is Num else (_sym if i.it is Sym else _data))(i,v)
   return v
 
-# Subtraction means add, with a negative increment  
-def sub(i,v,purge=False): 
-  return add(i, v, inc= -1, purge=purge)
+
