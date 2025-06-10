@@ -26,8 +26,9 @@ sh: ## run my shell
 	
 T=cd $(Top)/tests; python3 -B
 
-o    :; $T lib.py eg__o
-csv  :; $T lib.py eg__csv
-cols :; $T data.py eg__cols
-	
 all: o csv cols
+
+o    :; $T lib.py o
+csv  :; $T lib.py csv
+cols :; $T data.py cols
+	

@@ -1,6 +1,6 @@
-import math,sys
-sys.path.insert(0, "../src")
+import sys; sys.path.insert(0, "../src")
 
+import math
 from lib import o,csv,lines,cli
 from example import EXAMPLE
 
