@@ -1,3 +1,9 @@
+# ater much recursive make file nonsense, i finally went with
+# one entralized make
+
+#----------------------------------------------------------------
+# General tricks
+
 SHELL     := bash
 MAKEFLAGS += --warn-undefined-variables
 .SILENT:
@@ -23,7 +29,10 @@ push: ## commit to main
 
 sh: ## run my shell
 	Top=$(Top) bash --init-file $(Top)/etc/init.sh -i
-	
+
+#----------------------------------------------------------------
+# Local tricks
+
 T=cd $(Top)/tests; python3 -B
 
 all: o csv cols
