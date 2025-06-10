@@ -10,7 +10,7 @@ Top=$(shell git rev-parse --show-toplevel)
 help:  ## show help
 	gawk 'BEGIN { FS   = ":.*## "; print "\nmake [WHAT]" }              \
 	      /^[^ \t].*##/ {                                                \
-	        printf("   $(SHOUT)%-15s$(QUIET) : %s\n", $$1, $$2) | "sort"} \
+	        printf("   $(SHOUT)%-10s$(QUIET) %s\n", $$1, $$2) | "sort"} \
 	' $(MAKEFILE_LIST)
 
 pull: ## update from main
@@ -28,7 +28,7 @@ T=cd $(Top)/tests; python3 -B
 
 all: o csv cols
 
-o    :; $T lib.py o
-csv  :; $T lib.py csv
-cols :; $T data.py cols
+o    :; $T lib.py o   ## demo simple classes
+csv  :; $T lib.py csv ## demo reading csv files
+cols :; $T data.py cols ## demo csv files --> Data
 	
