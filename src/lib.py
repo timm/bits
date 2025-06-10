@@ -1,5 +1,9 @@
 import random,sys
 
+def cli(d):
+  if len(sys.argv) > 1 and (fn:= d.get(sys.argv[1])): fn()
+  else: print("? no example found in ", sys.argv)
+
 big = 1E32
 pick = random.choice
 picks = random.choices

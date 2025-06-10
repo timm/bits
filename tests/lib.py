@@ -1,7 +1,7 @@
 import math,sys
 sys.path.insert(0, "../src")
 
-from lib import o,csv,lines
+from lib import o,csv,lines,cli
 from example import EXAMPLE
 
 def eg__o():
@@ -16,4 +16,4 @@ def eg__csv():
     if type(row[0]) in [int,float]: n += 1
   assert s==1 and n==100
 
-globals()[sys.argv[1]]()
+cli(dict(o=eg__o, csv=eg__csv))
