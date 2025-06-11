@@ -15,10 +15,6 @@ def shuffle(lst):
   random.shuffle(lst)
   return lst
 
-def adds(i,lst):
-  [add(i,x) for x in lst]
-  return i
-
 # Iterate over lines in a file.
 def doc(file):
   with open(file, 'r', newline='', encoding='utf-8') as f:
